@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio profesional de Nicoll Javier Nieves - Gestor de Información y Desarrollador">
+    <meta name="author" content="Nicoll Javier Nieves">
+    <title>Nicoll Javier Nieves - Portfolio</title>
+    <style>
+        /* ============================================
+           PRIMITIVE TOKENS - Raw Values
+           ============================================ */
+        :root {
+            /* Colors */
+            --primitive-blue-50: #eff6ff;
+            --primitive-blue-100: #dbeafe;
+            --primitive-blue-500: #3b82f6;
+            --primitive-blue-600: #2563eb;
+            --primitive-blue-700: #1d4ed8;
+            --primitive-blue-900: #1e3a8a;
+            
+            --primitive-gray-50: #f9fafb;
+            --primitive-gray-100: #f3f4f6;
+            --primitive-gray-200: #e5e7eb;
+            --primitive-gray-300: #d1d5db;
+            --primitive-gray-500: #6b7280;
+            --primitive-gray-700: #374151;
+            --primitive-gray-900: #111827;
+            
+            --primitive-green-50: #f0fdf4;
+            --primitive-green-500: #22c55e;
+            --primitive-green-600: #16a34a;
+            
+            --primitive-amber-50: #fffbeb;
+            --primitive-amber-500: #f59e0b;
+            
+            /* Spacing - 8px Grid */
+            --primitive-space-1: 0.25rem;
+            --primitive-space-2: 0.5rem;
+            --primitive-space-3: 0.75rem;
+            --primitive-space-4: 1rem;
+            --primitive-space-6: 1.5rem;
+            --primitive-space-8: 2rem;
+            --primitive-space-12: 3rem;
+            --primitive-space-16: 4rem;
+            --primitive-space-20: 5rem;
+            --primitive-space-24: 6rem;
+            
+            /* Typography */
+            --primitive-font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --primitive-font-family-mono: 'Fira Code', 'Courier New', monospace;
+            
+            --primitive-font-size-xs: 0.75rem;
+            --primitive-font-size-sm: 0.875rem;
+            --primitive-font-size-base: 1rem;
+            --primitive-font-size-lg: 1.125rem;
+            --primitive-font-size-xl: 1.25rem;
+            --primitive-font-size-2xl: 1.5rem;
+            --primitive-font-size-3xl: 1.875rem;
+            --primitive-font-size-4xl: 2.25rem;
+            --primitive-font-size-5xl: 3rem;
+            
+            --primitive-font-weight-normal: 400;
+            --primitive-font-weight-medium: 500;
+            --primitive-font-weight-semibold: 600;
+            --primitive-font-weight-bold: 700;
+            
+            --primitive-line-height-tight: 1.25;
+            --primitive-line-height-normal: 1.5;
+            --primitive-line-height-relaxed: 1.75;
+            
+            /* Border Radius */
+            --primitive-radius-none: 0;
+            --primitive-radius-sm: 0.125rem;
+            --primitive-radius-md: 0.375rem;
+            --primitive-radius-lg: 0.5rem;
+            --primitive-radius-xl: 0.75rem;
+            --primitive-radius-2xl: 1rem;
+            --primitive-radius-full: 9999px;
+            
+            /* Shadows */
+            --primitive-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --primitive-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --primitive-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --primitive-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            
+            /* ============================================
+               SEMANTIC TOKENS - Design Intent
+               ============================================ */
+            --color-background: var(--primitive-gray-50);
+            --color-surface: var(--primitive-gray-100);
+            --color-surface-elevated: white;
+            
+            --color-text-primary: var(--primitive-gray-900);
+            --color-text-secondary: var(--primitive-gray-700);
+            --color-text-muted: var(--primitive-gray-500);
+            
+            --color-border: var(--primitive-gray-200);
+            --color-border-light: var(--primitive-gray-100);
+            
+            --color-accent-primary: var(--primitive-blue-600);
+            --color-accent-primary-light: var(--primitive-blue-50);
+            
+            --color-success: var(--primitive-green-600);
+            --color-success-light: var(--primitive-green-50);
+            
+            --color-warning: var(--primitive-amber-500);
+            --color-warning-light: var(--primitive-amber-50);
+            
+            /* Spacing */
+            --space-xs: var(--primitive-space-1);
+            --space-sm: var(--primitive-space-2);
+            --space-md: var(--primitive-space-4);
+            --space-lg: var(--primitive-space-8);
+            --space-xl: var(--primitive-space-12);
+            --space-2xl: var(--primitive-space-16);
+            --space-3xl: var(--primitive-space-24);
+            
+            /* Typography */
+            --font-family-body: var(--primitive-font-family-sans);
+            --font-family-code: var(--primitive-font-family-mono);
+            
+            --font-size-body: var(--primitive-font-size-base);
+            --font-size-small: var(--primitive-font-size-sm);
+            --font-size-large: var(--primitive-font-size-lg);
+            
+            --line-height-body: var(--primitive-line-height-normal);
+            
+            /* ============================================
+               COMPONENT TOKENS
+               ============================================ */
+            --card-padding: var(--space-lg);
+            --card-radius: var(--primitive-radius-xl);
+            --card-shadow: var(--primitive-shadow-md);
+            
+            --button-padding: var(--space-md) var(--space-lg);
+            --button-radius: var(--primitive-radius-lg);
+            
+            --input-padding: var(--space-md);
+            --input-radius: var(--primitive-radius-lg);
+            --input-border: 1px solid var(--color-border);
+        }
+
+        /* ============================================
+           BASE STYLES & RESET
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: var(--font-family-body);
+            font-size: var(--font-size-body);
+            line-height: var(--line-height-body);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ============================================
+           SEMANTIC HTML ELEMENTS
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: var(--primitive-font-weight-bold);
+            line-height: var(--primitive-line-height-tight);
+            margin-bottom: var(--space-md);
+        }
+
+        h1 {
+            font-size: var(--primitive-font-size-4xl);
+        }
+
+        h2 {
+            font-size: var(--primitive-font-size-3xl);
+        }
+
+        h3 {
+            font-size: var(--primitive-font-size-2xl);
+        }
+
+        p {
+            margin-bottom: var(--space-md);
+        }
+
+        a {
+            color: var(--color-accent-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-primary);
+            text-decoration: underline;
+        }
+
+        a:focus {
+            outline: 2px solid var(--color-accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           UTILITIES
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .skip-to-content {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        .skip-to-content:focus {
+            top: var(--space-md);
+            left: var(--space-md);
+            z-index: 1000;
+            padding: var(--space-md);
+            background: var(--color-accent-primary);
+            color: white;
+            border-radius: var(--button-radius);
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* ============================================
+           HEADER / NAVIGATION
+           ============================================ */
+        header {
+            background: var(--color-surface-elevated);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--primitive-shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+        }
+
+        .logo {
+            font-size: var(--primitive-font-size-2xl);
+            font-weight: var(--primitive-font-weight-bold);
+            color: var(--color-accent-primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--color-text-secondary);
+            font-weight: var(--primitive-font-weight-medium);
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            color: var(--color-accent-primary);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            background: linear-gradient(135deg, var(--primitive-blue-600) 0%, var(--primitive-blue-700) 100%);
+            color: white;
+            padding: var(--space-3xl) var(--space-md);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: var(--primitive-font-size-5xl);
+            margin-bottom: var(--space-md);
+            color: white;
+        }
+
+        .hero .subtitle {
+            font-size: var(--primitive-font-size-xl);
+            margin-bottom: var(--space-lg);
+            color: var(--primitive-blue-50);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: var(--button-padding);
+            border-radius: var(--button-radius);
+            font-weight: var(--primitive-font-weight-medium);
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            font-size: var(--primitive-font-size-base);
+        }
+
+        .btn-primary {
+            background: var(--color-accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: var(--primitive-blue-700);
+            transform: translateY(-2px);
+            box-shadow: var(--primitive-shadow-lg);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-accent-primary);
+            border: 2px solid var(--color-accent-primary);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background: var(--color-accent-primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           CARDS
+           ============================================ */
+        .card {
+            background: var(--color-surface-elevated);
+            padding: var(--card-padding);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--primitive-shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        section {
+            padding: var(--space-3xl) var(--space-md);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+        }
+
+        .about-content h3 {
+            color: var(--color-accent-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .about-content p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ============================================
+           SKILLS SECTION
+           ============================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .skill-category {
+            background: var(--color-surface-elevated);
+            padding: var(--card-padding);
+            border-radius: var(--card-radius);
+            border-left: 4px solid var(--color-accent-primary);
+        }
+
+        .skill-category h3 {
+            color: var(--color-accent-primary);
+            margin-bottom: var(--space-md);
+            font-size: var(--primitive-font-size-lg);
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: var(--color-accent-primary-light);
+            color: var(--color-accent-primary);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--primitive-radius-full);
+            font-size: var(--primitive-font-size-sm);
+            font-weight: var(--primitive-font-weight-medium);
+        }
+
+        /* ============================================
+           PROJECTS SECTION
+           ============================================ */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .project-card {
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: var(--primitive-shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .project-header {
+            background: var(--color-accent-primary-light);
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .project-header h3 {
+            color: var(--color-accent-primary);
+            margin: 0;
+        }
+
+        .project-body {
+            padding: var(--card-padding);
+        }
+
+        .project-body p {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-small);
+        }
+
+        /* ============================================
+           EXPERIENCE SECTION
+           ============================================ */
+        .experience-item {
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+        }
+
+        .experience-header h3 {
+            color: var(--color-accent-primary);
+            margin: 0;
+        }
+
+        .experience-subtitle {
+            color: var(--color-text-secondary);
+            font-weight: var(--primitive-font-weight-medium);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            padding: var(--space-2xl) var(--space-md);
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+            margin-top: auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--primitive-radius-full);
+            background: var(--color-surface-elevated);
+            color: var(--color-accent-primary);
+            border: 2px solid var(--color-accent-primary);
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover,
+        .social-link:focus {
+            background: var(--color-accent-primary);
+            color: white;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: var(--primitive-font-size-3xl);
+            }
+
+            nav ul {
+                gap: var(--space-md);
+                font-size: var(--font-size-small);
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            section {
+                padding: var(--space-2xl) var(--space-md);
+            }
+        }
+
+        /* ============================================
+           ACCESSIBILITY - Focus Visible
+           ============================================ */
+        :focus-visible {
+            outline: 2px solid var(--color-accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+
+            header,
+            footer,
+            .hero-buttons {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main" class="skip-to-content">Saltar al contenido principal</a>
+
+    <!-- HEADER / NAVIGATION -->
+    <header role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">NJN</div>
+                <nav role="navigation" aria-label="Navegación principal">
+                    <ul>
+                        <li><a href="#about">Sobre mí</a></li>
+                        <li><a href="#skills">Habilidades</a></li>
+                        <li><a href="#projects">Proyectos</a></li>
+                        <li><a href="#experience">Experiencia</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-content">
+            <h1 id="hero-heading">Nicoll Javier Nieves</h1>
+            <p class="subtitle">Gestor de la Información & Desarrollador Full Stack</p>
+            <p style="color: var(--primitive-blue-50); margin-bottom: var(--space-lg);">
+                Especialista en desarrollo de software, análisis de datos y soluciones tecnológicas innovadoras
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Contactarme</a>
+                <a href="#projects" class="btn btn-secondary">Ver Proyectos</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main">
+        <!-- ABOUT SECTION -->
+        <section id="about" aria-labelledby="about-heading">
+            <div class="container">
+                <h2 id="about-heading">Sobre mí</h2>
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h3>Profesional en Transformación Digital</h3>
+                        <p>
+                            Soy un gestor de información altamente capacitado con 500 horas de práctica profesional en áreas administrativas y soporte técnico. 
+                            Actualmente trabajo como <strong>Gestor de la Información en una ONG</strong>, donde ayudo a organizaciones a gestionar y analizar datos críticos.
+                        </p>
+                        <p>
+                            Mi pasión es combinar habilidades administrativas con tecnología moderna para crear soluciones que tengan impacto real. 
+                            Estoy en formación como <strong>Técnico en Programación y Desarrollo de Software</strong> y tengo experiencia práctica con 
+                            frameworks modernos, gestión de bases de datos y herramientas de análisis de datos.
+                        </p>
+                        <h3>Formación Académica</h3>
+                        <ul style="list-style: none; color: var(--color-text-secondary);">
+                            <li>✓ Técnico en Auxiliar Administrativo</li>
+                            <li>✓ Técnico en Programación y Desarrollo de Software (en formación)</li>
+                        </ul>
+                    </div>
+                    <div style="background: linear-gradient(135deg, var(--color-accent-primary-light) 0%, var(--primitive-blue-50) 100%); 
+                                padding: var(--space-2xl); border-radius: var(--card-radius); text-align: center;">
+                        <div style="font-size: var(--primitive-font-size-5xl); margin-bottom: var(--space-md);">💼</div>
+                        <p style="color: var(--color-accent-primary); font-weight: var(--primitive-font-weight-bold);">
+                            500+ Horas de Experiencia Profesional
+                        </p>
+                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-small);">
+                            En desarrollo, administración y soporte técnico
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" style="background: var(--color-surface);" aria-labelledby="skills-heading">
+            <div class="container">
+                <h2 id="skills-heading">Stack Tecnológico</h2>
+                
+                <div class="skills-grid">
+                    <!-- Lenguajes y Frameworks -->
+                    <div class="skill-category">
+                        <h3>🚀 Lenguajes & Frameworks</h3>
+                        <ul class="skills-list">
+                            <li><span class="skill-tag">Python</span></li>
+                            <li><span class="skill-tag">Flask</span></li>
+                            <li><span class="skill-tag">Django</span></li>
+                            <li><span class="skill-tag">HTML/CSS</span></li>
+                            <li><span class="skill-tag">JavaScript</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Bases de Datos -->
+                    <div class="skill-category">
+                        <h3>🗄️ Bases de Datos</h3>
+                        <ul class="skills-list">
+                            <li><span class="skill-tag">SQL Server</span></li>
+                            <li><span class="skill-tag">Tablas & Índices</span></li>
+                            <li><span class="skill-tag">Consultas Avanzadas</span></li>
+                            <li><span class="skill-tag">Normalización</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Análisis de Datos -->
+                    <div class="skill-category">
+                        <h3>📊 Análisis de Datos</h3>
+                        <ul class="skills-list">
+                            <li><span class="skill-tag">Big Data</span></li>
+                            <li><span class="skill-tag">Data Science</span></li>
+                            <li><span class="skill-tag">Power BI</span></li>
+                            <li><span class="skill-tag">Visualización</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- IA Local -->
+                    <div class="skill-category">
+                        <h3>🤖 IA & Modelos Locales</h3>
+                        <ul class="skills-list">
+                            <li><span class="skill-tag">Ollama</span></li>
+                            <li><span class="skill-tag">DeepSeek</span></li>
+                            <li><span class="skill-tag">WizardCoder</span></li>
+                            <li><span class="skill-tag">LLMs</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" aria-labelledby="projects-heading">
+            <div class="container">
+                <h2 id="projects-heading">Proyectos Destacados</h2>
+                
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card">
+                        <div class="project-header">
+                            <h3>Tejiendo Redes de Protección</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>
+                                Proyecto humanitario enfocado en el procesamiento y limpieza de registros de datos humanitarios. 
+                                Implementé soluciones de ETL para garantizar la integridad y calidad de datos críticos.
+                            </p>
+                            <div style="margin-top: var(--space-md); display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Data Processing</span>
+                                <span class="skill-tag">SQL</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card">
+                        <div class="project-header">
+                            <h3>Innovación Digital</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>
+                                Propuesta innovadora de recolección de datos mediante bots de WhatsApp para organizaciones mundiales. 
+                                Diseño de arquitectura para automatizar procesos de obtención de información de forma escalable.
+                            </p>
+                            <div style="margin-top: var(--space-md); display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                                <span class="skill-tag">WhatsApp API</span>
+                                <span class="skill-tag">Automation</span>
+                                <span class="skill-tag">Flask</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card">
+                        <div class="project-header">
+                            <h3>Gestión de Información</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>
+                                Sistema integral de gestión de información para ONGs. Desarrollo de dashboards y reportes 
+                                en Power BI para visualización de datos estratégicos y toma de decisiones.
+                            </p>
+                            <div style="margin-top: var(--space-md); display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                                <span class="skill-tag">Power BI</span>
+                                <span class="skill-tag">SQL Server</span>
+                                <span class="skill-tag">Dashboards</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" style="background: var(--color-surface);" aria-labelledby="experience-heading">
+            <div class="container">
+                <h2 id="experience-heading">Experiencia Profesional</h2>
+                
+                <article class="experience-item">
+                    <div class="experience-header">
+                        <h3>Gestor de la Información</h3>
+                        <span style="color: var(--color-text-muted); font-size: var(--font-size-small);">Actual</span>
+                    </div>
+                    <p class="experience-subtitle">ONG - Organización No Gubernamental</p>
+                    <p>
+                        Responsable de la gestión, procesamiento y análisis de datos humanitarios. 
+                        Implementación de sistemas para asegurar la calidad e integridad de registros críticos. 
+                        Desarrollo de reportes y análisis que facilitan la toma de decisiones estratégicas.
+                    </p>
+                </article>
+
+                <article class="experience-item">
+                    <div class="experience-header">
+                        <h3>Técnico en Soporte & Desarrollo</h3>
+                        <span style="color: var(--color-text-muted); font-size: var(--font-size-small);">Prácticas Profesionales</span>
+                    </div>
+                    <p class="experience-subtitle">500+ horas de formación y experiencia</p>
+                    <p>
+                        Participación en proyectos de administración técnica, análisis de sistemas y desarrollo de software. 
+                        Experiencia con Flask, Django, SQL Server y herramientas de análisis de datos. 
+                        Colaboración en soluciones de automatización e innovación digital.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" aria-labelledby="contact-heading">
+            <div class="container" style="max-width: 600px;">
+                <h2 id="contact-heading">Conectemos</h2>
+                <p style="text-align: center; color: var(--color-text-secondary); margin-bottom: var(--space-2xl);">
+                    Estoy disponible para proyectos, colaboraciones y oportunidades de desarrollo. 
+                    No dudes en contactarme para discutir cómo podemos trabajar juntos.
+                </p>
+                
+                <div style="background: var(--color-surface-elevated); padding: var(--card-padding); 
+                           border-radius: var(--card-radius); border-left: 4px solid var(--color-accent-primary);">
+                    <h3 style="color: var(--color-accent-primary);">Información de Contacto</h3>
+                    <p><strong>Nombre:</strong> Nicoll Javier Nieves</p>
+                    <p><strong>Ubicación:</strong> Colombia</p>
+                    <p><strong>Disponibilidad:</strong> Abierto a proyectos remotos</p>
+                </div>
+
+                <div class="social-links" style="margin-top: var(--space-2xl);">
+                    <a href="#" class="social-link" title="LinkedIn" aria-label="Perfil en LinkedIn">in</a>
+                    <a href="#" class="social-link" title="GitHub" aria-label="Perfil en GitHub">gh</a>
+                    <a href="#" class="social-link" title="Email" aria-label="Enviar correo">✉</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo">
+        <p>&copy; 2026 Nicoll Javier Nieves. Todos los derechos reservados.</p>
+        <p style="font-size: var(--font-size-small); margin-top: var(--space-md);">
+            Diseñado y desarrollado con estándares de accesibilidad WCAG 2.1 AA
+        </p>
+    </footer>
+</body>
+</html>
